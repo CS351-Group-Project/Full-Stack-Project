@@ -137,6 +137,23 @@ Starting college made me realize how quickly special moments pass by. I take pho
 **Implementation 5:**
 Build a web app where students create diary entries with photos, short voice recordings, and text about daily experiences. Users can tag entries by location or milestone, view their timeline chronologically, and share memories with friends. At graduation, the app generates a personalized "College Story Book" digital collection of their four-year journey.
 
+#3 Idea - Mithil
+Cultural Recipe Generator
+
+Storytelling:
+Rather than presenting recipes as simple instructions, the app frames each dish as a cultural experience. Users not only learn how to cook, but also gain insight into the traditions, history, and personal stories that make each dish unique and meaningful.
+
+Implementation:
+Concept:
+   The Cultural Recipe Generator is a web-based application that combines culinary exploration with interactive storytelling. Users can discover traditional or fusion recipes while learning about the cultural, historical stories behind each dish.
+
+Features:
+   Ingredient-Based Suggestions: Users input ingredients or preferences, and the app suggests culturally inspired dishes.
+   Storytelling for Each Recipe: Every recipe includes a narrative explaining its origin, cultural significance, or family tradition.
+   Save, Share, and Contribute: Users can save favorite recipes, share them with friends, or contribute their own personal variations.
+   Multimedia Support: Recipes include images, step-by-step videos, and optional audio narration to enhance engagement.
+
+
 # Idea Finalization
 
 **From 5 project ideas you have above, please choose one of the project that you are going with for the rest of the semester. Explain why you are going with that project**
