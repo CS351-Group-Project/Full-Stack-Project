@@ -131,11 +131,11 @@ A lot of mythical stories like Greek Mythology stories have been long gone. I st
 Will create a web-based interactive story that brings such mythical stories to life and can have the users guide the characters through the story by making the decisions for them and experience the same lessons that were taught in the stories.
 
 #2 Idea 
-**Idea - Story - Inspiration 5:**
-Growing up in India, I witnessed firsthand how language barriers can create significant challenges in daily life. India has 22 official languages and hundreds of regional dialects, yet many people only speak their native language fluently. I've seen tourists struggle to communicate in local markets, students from different states facing difficulties in universities, and families moving to new regions where their children can't understand the local language in schools. During my travels across different Indian states, I often found myself in situations where I couldn't communicate effectively with locals, missing out on authentic cultural experiences and sometimes facing practical difficulties. This personal experience inspired me to create a solution that could break down these language barriers and help people connect across India's rich linguistic diversity.
+**Saanvi-Idea - Story - Inspiration 5:**
+Starting college made me realize how quickly special moments pass by. I take photos of events but rarely capture the feelings behind them - like being nervous during orientation or discovering my favorite study spot. I want to create a simple way for students to preserve their college journey through storytelling, making a digital time capsule to look back on years later.
 
 **Implementation 5:**
-Develop a web application that provides real-time translation between major Indian languages including Hindi, Bengali, Tamil, Telugu, Marathi, Gujarati, Kannada, Malayalam, Punjabi, and others. The app would feature text-to-text translation, voice-to-text input with audio output, and a phrasebook for common expressions in different contexts (travel, business, education, healthcare). Key features would include offline functionality for areas with poor internet connectivity, regional dialect recognition, cultural context notes for certain phrases, and a community feature where native speakers can verify and improve translations. The app would also include a learning mode that helps users gradually pick up basic phrases in new languages, making it both a translation tool and a language learning aid for India's diverse linguistic landscape.
+Build a web app where students create diary entries with photos, short voice recordings, and text about daily experiences. Users can tag entries by location or milestone, view their timeline chronologically, and share memories with friends. At graduation, the app generates a personalized "College Story Book" digital collection of their four-year journey.
 
 # Idea Finalization
 
