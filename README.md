@@ -75,14 +75,12 @@ Our group aims to respond to messages within **24 hours** on Discord. For urgent
 
 # Norms  
 
-**Q4a:** How will your group handle situations when there is conflict in your group?  
-**Q4b:** How will your group handle situations when a member is not contributing enough?  
+**Q4a:** How will your group handle situations when there is conflict in your group? 
+**Ans** When conflict arises, our group will first openly communicate where all members can express their perspective. We will create a pros and cons list for different approaches and find the best solution.
 
-**Example:**  
-*If there is a disagreement on direction, we will resolve it with a unanimous vote.*  
-*If team members do not pull their weight, the team will politely remind them of their duties.*  
-*If they continue to not pull their weight, then they will get another warning and a chance to start being more productive.*  
-
+**Q4b:** How will your group handle situations when a member is not contributing enough? 
+**Ans** Have Group discussions to identify issues and provide support, followed by formal warnings if problem still persist.
+ 
 ---
 
 # Roles  
