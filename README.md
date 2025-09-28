@@ -1,9 +1,10 @@
 # Logistics  
 
 **Q1:** At what time in the week would your group be available to meet online?  
-WE WILL BE MEETING ON THE FOLLOWING DAYS:
-Tuesday (IN-PERSON): 12:30 -13:45
-Sunday (online, Discord): 10:00 - 12:00
+## Weekly Meeting Schedule
+- **Tuesdays (In-Person):** 12:30 – 1:45 PM  
+- **Sundays (Online, via Discord):** 10:00 AM – 12:00 PM
+
 ---
 
 # Timeline: Weekly Meeting Goals  
