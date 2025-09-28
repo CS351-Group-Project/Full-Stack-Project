@@ -57,14 +57,19 @@ Prior to 12/2:
 **Q3b:** What are the usernames of each group member on that platform?  
 **Q3c:** What is your group’s expected response time to messages?  
 
-**Example:**  
-*We will use Discord for communication*  
+## Group Meetings
+### a) Meeting Types
+- In-Person
+- Online (via Discord)
 
-*Usernames:*  
-*Justin - ghostmechanic*  
-*Claudia - ninth.py*  
-*Mauricio - itsperi*  
-*Our expected response time will be within 12 hours.*  
+### b) Discord Usernames
+- Mithil
+- deepikka
+- saan
+- samithSCL
+
+### c) Expected Response Time
+Our group aims to respond to messages within **24 hours** on Discord. For urgent matters, members should try to reply as soon as possible.
 
 ---
 
