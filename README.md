@@ -88,6 +88,9 @@ Our group aims to respond to messages within **24 hours** on Discord. For urgent
 # Roles  
 
 **Q5:** How will your group divide your role in the Group Project?  
+Frontend: Saanvi/Deepikka
+Backend: Smith/Mithil
+DBMS(if needed): Deepikka
 
 **Example:**  
 *Mauricio - Backend, Justin - Project Lead, Claudia - Frontend.*  
@@ -97,6 +100,7 @@ Our group aims to respond to messages within **24 hours** on Discord. For urgent
 # Tech Stacks
 
 **Q6:** Which tech stacks will your group use? (Django + React or Flask + React)
+Django + React
 
 ---
 # Full Stack Group Project Track  
