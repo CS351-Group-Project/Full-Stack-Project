@@ -8,13 +8,45 @@ Sunday (online, Discord): 10:00 - 12:00
 
 # Timeline: Weekly Meeting Goals  
 
-**Q2:** What is your goals that your group want to achieve in each weekly meeting?  
-**Example:**  
-*Prior to 3/13: Weekly Meeting we will plan out some preliminary info/idea for the project itself ahead of the scheduled meeting like which data source/API and data structures we will use in our backend. We will browse [the given list of public APIs for inspiration](https://github.com/public-apis/public-apis).*  
+**Q2:** What is your goals that your group want to achieve in each weekly meeting ?
 
-*During week of 3/25: Work on the project rough draft itself to make a functioning project with data input, data structure usage, and processing into output on the frontend.*  
+Prior to 10/5:
+    * Decide how the app will tell cultural stories.
+    * Research examples (like Never Alone) to inspire how to integrate storytelling with interactivity.
 
-*Prior to 4/17: Meet together weekly to target project weakpoints/bugs and possibly visit office hours to get guidance if the progress feels weak.*  
+During week of 10/12:
+* Data & Content Planning:
+    * Curate an initial list of with short cultural notes.
+    * Research Chicago restaurants/markets to feature.
+    * Decide whether to use an external API (e.g., maps/restaurant data) or create a custom dataset.
+
+During week of 10/19:
+* Backend + Structure:
+    * Build basic data structures for storing dishes/cultural stories/locations.
+    * Import some sample data to test.
+
+During week of 10/26:
+* Frontend Prototype:
+    * Create simple UI to browse dishes.
+    * Display cultural significance text alongside dish images.
+    * Add a basic map/location feature for restaurants.
+
+During week of 11/2:
+* Interactivity & Storytelling Layer:
+    * Add features for filtering/searching dishes.
+    * Experiment with ways to make storytelling more engaging like: pop-up narratives, personal anecdotes, audio snippets
+    * Gather feedback on whether the “storytelling” feels authentic and immersive.
+
+During week of 11/9:
+* Refinement & Polish:
+    * Focus on visual design and cultural expression (fonts, colors, layout that reflect Vietnamese aesthetics).
+    * Fix weak points in functionality (bugs, performance).
+    * Possibly visit office hours for technical feedback.
+
+Prior to 12/2:
+* Prepare presentation/demo version of the project.
+* Finalize cultural storytelling elements so the app feels authentic and educational.
+* Practice walkthrough of the project for final presentation.
 
 ---
 
