@@ -153,6 +153,22 @@ Features:
    Save, Share, and Contribute: Users can save favorite recipes, share them with friends, or contribute their own personal variations.
    Multimedia Support: Recipes include images, step-by-step videos, and optional audio narration to enhance engagement.
 
+#Idea 4  – Samith – Inspiration:
+The USA is home to a large collection of races, cultures, ideas, and people. However, much of this diversity is a shallow copy of the originals. For deeply cultural people, this creates a void of festivals, rituals, and experiences that connect them to their roots. Many miss out on the joy of celebrations, community gatherings, and traditions that make cultures vibrant.
+
+Implementation:
+A web application that collects festivals, temple events, and cultural occasions according to the calendar. The app will:
+
+Provide a cultural calendar showing upcoming events.
+
+Allow filtering by culture, religion, or location.
+
+Integrate maps to show nearby temples and cultural centers.
+
+Send reminders and notifications for important cultural occasions.
+
+This way, users can experience festivals, attend gatherings, and reconnect with their cultural identity even while living in the USA.
+
 
 # Idea Finalization
 
