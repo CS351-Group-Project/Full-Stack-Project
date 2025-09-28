@@ -1,20 +1,24 @@
 # Logistics  
 
 **Q1:** At what time in the week would your group be available to meet online?  
-WE WILL BE MEETING ON THE FOLLOWING DAYS:
-Tuesday (IN-PERSON): 12:30 -13:45
-Sunday (online, Discord): 10:00 - 12:00
+**Example:**  
+*We are available to meet online on weekends from 12pm-8pm (12-2pm Saturday + Sunday), as well as from 4pm-6pm on Fridays.*  
+*Our weekly meeting will be Thursday 11am-12pm.*  
+
 ---
 
 # Timeline: Weekly Meeting Goals  
 
 **Q2:** What is your goals that your group want to achieve in each weekly meeting?  
 **Example:**  
-*Prior to 3/13: Weekly Meeting we will plan out some preliminary info/idea for the project itself ahead of the scheduled meeting like which data source/API and data structures we will use in our backend. We will browse [the given list of public APIs for inspiration](https://github.com/public-apis/public-apis).*  
 
-*During week of 3/25: Work on the project rough draft itself to make a functioning project with data input, data structure usage, and processing into output on the frontend.*  
+*All the actions to be completed for the week will be decided in our offline meet up and the sunday online meet up we will inform the completion status, and help each other if required. *
 
-*Prior to 4/17: Meet together weekly to target project weakpoints/bugs and possibly visit office hours to get guidance if the progress feels weak.*  
+*Prior to 10/13 : we will most likely, figure out the intricracies(project fuctions and purpose, basic designs and system design) of our final cultural project idea. *  
+
+*During week of 10/25: We want to make a bare minimum prototype.*  
+
+*Future: develop the prototype into our final prodcut. (lets see how it turns out :) ) *  
 
 ---
 
@@ -27,12 +31,14 @@ Sunday (online, Discord): 10:00 - 12:00
 **Example:**  
 *We will use Discord for communication*  
 
-*Usernames:*  
-*Justin - ghostmechanic*  
-*Claudia - ninth.py*  
-*Mauricio - itsperi*  
-*Our expected response time will be within 12 hours.*  
 
+*DISCORD USERNAMES:*
+*Mithil*
+*deepikka*
+*saan*
+*samithSCL*
+
+*group will response by 5-10 hrs max*
 ---
 
 # Norms  
