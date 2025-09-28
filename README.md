@@ -123,9 +123,12 @@ Django + React
 
 # Track 3: Creative Coding and Cultural Expression
 
+#1 idea
 **Idea - Story - Inspiration 4:**
+A lot of mythical stories like Greek Mythology stories have been long gone. I studied about them in middle school and haven't heard about them since. These stories hold a lot of wisdom and values within the stories and were passed through generations. They are not only entertaining, but also carry a lot of deep meanings about identity, resilience, and belonging.
 
 **Implementation 4:**
+Will create a web-based interactive story that brings such mythical stories to life and can have the users guide the characters through the story by making the decisions for them and experience the same lessons that were taught in the stories.
 
 **Idea - Story - Inspiration 5:**
 
