@@ -11,9 +11,13 @@
 
 **Q2:** What is your goals that your group want to achieve in each weekly meeting ?
 
+we will decide the specifics in the weekly meet on tuesday. We plan to make a prototype by 2 weeks. 
+
 Prior to 10/5:
     * Decide how the app will tell cultural stories.
     * Research examples (like Never Alone) to inspire how to integrate storytelling with interactivity.
+
+
 
 During week of 10/12:
 * Data & Content Planning:
@@ -79,7 +83,7 @@ Our group aims to respond to messages within **24 hours** on Discord. For urgent
 **Ans** When conflict arises, our group will first openly communicate where all members can express their perspective. We will create a pros and cons list for different approaches and find the best solution.
 
 **Q4b:** How will your group handle situations when a member is not contributing enough? 
-**Ans** Have Group discussions to identify issues and provide support, followed by formal warnings if problem still persist.
+**Ans** We will clearly sort out what is going on and be non offensive. uneven work is fine when we know that the other person is trying his/her best.
  
 ---
 
@@ -153,7 +157,7 @@ Features:
    Save, Share, and Contribute: Users can save favorite recipes, share them with friends, or contribute their own personal variations.
    Multimedia Support: Recipes include images, step-by-step videos, and optional audio narration to enhance engagement.
 
-#Idea 4  – Samith – Inspiration:
+#Idea 4  – Samith – Inspiration:( final decision )
 The USA is home to a large collection of races, cultures, ideas, and people. However, much of this diversity is a shallow copy of the originals. For deeply cultural people, this creates a void of festivals, rituals, and experiences that connect them to their roots. Many miss out on the joy of celebrations, community gatherings, and traditions that make cultures vibrant.
 
 Implementation:
