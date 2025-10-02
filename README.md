@@ -173,6 +173,28 @@ This way, users can experience festivals, attend gatherings, and reconnect with 
 # Idea Finalization
 
 **From 5 project ideas you have above, please choose one of the project that you are going with for the rest of the semester. Explain why you are going with that project**
+Cultural Calendar Web Application
+
+Proposed by our teamate: Samith Sudini Reddy
+
+Motive
+
+Although we researched quite alot of different directions for the project, we thought that this Cultural Calendar app gave us the greatest opportunity to intersect storytelling, cultural representation as well as interactivity, all of which is aligns with our goal.
+
+Many students and residents in the USA are from diverse backgrounds, but they often feel disconnected from their own authentic cultural celebrations, rituals and events. This app tackles a real social issue that creates a shared place for students or residents to explore Cultural Festivals, temple events or get-togethers that are coming up.
+
+We have chosen to focus on this project because of:
+
+Cultural Relevance: The app creates connections to build community and honor diversity through events.
+
+Storytelling capacity: Each festival or event can be enhanced through cultural notes, traditions or personal stories to provide some meaningful content to the app experience.
+
+Technical Challenge: The ability to create multiple layers like database design to store data from users, third APIs for maps/event and authentification gives us an opportunity to conduct well rounded full-stack web development.
+
+Scalability: The app could be launched with local events and could later grow to events across the spectrum that will be decided by all of us teammates.
+
+This project captures well both technical learning expectations and cultural engagement creative outcomes.
+
 
 # Extra Credit (Only do this if you are done with Idea Finalization)
 
