@@ -173,6 +173,7 @@ This way, users can experience festivals, attend gatherings, and reconnect with 
 # Idea Finalization
 
 **From 5 project ideas you have above, please choose one of the project that you are going with for the rest of the semester. Explain why you are going with that project**
+
 Cultural Calendar Web Application
 
 Proposed by our teamate: Samith Sudini Reddy
