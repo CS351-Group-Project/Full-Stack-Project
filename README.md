@@ -202,23 +202,37 @@ This project captures technical learning expectations and cultural engagement cr
 ## Database Design
 
 **Q1: What database are you using for your project (SQLite, PostgreSQL, noSQL, MongoDB,...), and why do you choose it?**
+-> We are planning to use PostgreSQL, because it provides great RDBMS features, is a reliable performed.
 
 **Q2: How will database be helpful to your project? How will you design your database to support your application features?**
+-> The database will be useful for storing information about festivals, locations where it might be performed, reminders etc.
+-> It also helps with filtering while keeping the data normalized.
 
 ## Third-Party API Integration
 
 **Q3: Which third-party API(s) will you integrate into your project? What data will you pull from the API(s), and how will you use it in your application?**
+-> We will use Google Maps API for location, nearby temples and also for directions.
+-> Eventbrite API: To fetch live cultural events if available.
 
 **Q4: Does your API key has limitations such as rate limits or downtime? How are you going to deal with that?**
+-> Google maps has a limitation of number of requests it can handle.
+-> We plan on implementing caching for frequently accessed data like temple locations used alot etc..
 
 ## Authentication and Security
 
 **Q5: What authentication method will you use (e.g., username/password, OAuth, JWT)?**
+-> Not super fixed on it, but plan on using JSON web tokens with username/password login 
+-> Also, we mighht use OAuth for google-sign in, if needed.
 
 **Q6: How will you store and protect sensitive user data (e.g., passwords, tokens)?**
+-> We plan on hasing the passwords with bcrypt before it gets stored.
+-> API keys and tokens will be stored securely in env vars
+-> Sensitive info wont be harcoded in the repository.
 
 ## Deployment
 
 **Q7: Where will you deploy your project (e.g., Heroku, AWS, Render)? How will you manage environment variables and secrets during deployment?**
+-> From researching, we realised that Render might be a good choice, since it is free tier friendly, which is great for student projects.
 
 **Q8: How will you ensure your deployment is reliable and easy to update?**
+-> From our research, it seems that CI/CD piplines will be useful to automate deployment.
