@@ -194,7 +194,7 @@ Technical Challenge: The ability to create multiple layers like database design 
 
 Scalability: The app could be launched with local events and could later grow to events across the spectrum that will be decided by all of us teammates.
 
-This project captures well both technical learning expectations and cultural engagement creative outcomes.
+This project captures technical learning expectations and cultural engagement creative outcomes.
 
 
 # Extra Credit (Only do this if you are done with Idea Finalization)
