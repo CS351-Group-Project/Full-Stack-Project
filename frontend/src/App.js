@@ -41,10 +41,13 @@ export default function CulturalExplorer() {
     <div 
       className="min-h-screen p-8 flex items-center justify-center relative"
       style={{
-        backgroundImage: 'url(https://plus.unsplash.com/premium_vector-1727264008075-d95c16fcb265?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1615)',
+        fontFamily: "'Times New Roman', Times, serif",
+        backgroundImage: 'url("/images.jpeg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: 'fixed',
+        opacity: 0.8,
+        zIndex: -2
       }}
     >  
       <div className="max-w-7xl w-full relative z-10">
