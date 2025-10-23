@@ -2,6 +2,7 @@ Project Description & Goals
 Our project, the Cultural Calendar Web Application, aims to create an interactive digital space where users can discover and learn about cultural events, festivals, and traditions happening around them. The primary goal is to build community connections and promote cultural diversity by giving users easy access to cultural events.
 <img width="1258" height="899" alt="image" src="https://github.com/user-attachments/assets/f2c8644e-869f-4eb5-bb84-f783348809d7" />
 Figma Link : https://www.figma.com/design/sLrhHqP0mKlhVgCly7tvXp/milestone-3?node-id=0-1&t=EhH2SlJYNpJzjk9P-1
+
 Why This Layout and Flow Were Chosen
 1.	Login Page:
 The project starts with a simple login/registration screen to authenticate users. This allows specific cultural preferences to be saved for future use.
