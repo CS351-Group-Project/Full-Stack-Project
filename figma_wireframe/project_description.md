@@ -1,4 +1,4 @@
-Project Description & Goals
+Project Description & Goals (final version)
 
 Our project, the Cultural Calendar Web Application, aims to create an interactive digital space where users can discover and learn about cultural events, festivals, and traditions happening around them. The primary goal is to build community connections and promote cultural diversity by giving users easy access to cultural events.
 
