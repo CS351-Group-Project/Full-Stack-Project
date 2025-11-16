@@ -12,9 +12,9 @@ export default function NavBar() {
     <nav className="nav">
       <div className="grow">
         <Tab to="/hub" label="hub" />
-        <Tab to="/events" label="events" />
+        <Tab to="/dashboard" label="events" />
         <Tab to="/explore" label="explore" />
-        <Tab to="/profile" label="profile" />
+        <Tab to="/Info" label="profile" />
       </div>
       <Tab to="/login" label="exit/login" />
     </nav>

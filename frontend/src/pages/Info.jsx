@@ -1,21 +1,24 @@
-// Info.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import "../App.css";
 
-const API_URL = 'http://127.0.0.1:8000/api';
+const API_URL = "http://127.0.0.1:8000/api";
 
 export default function Info() {
   const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
+
   const [formData, setFormData] = useState({
     picture: null,
-    name: '',
-    age: '',
-    country: '',
-    culture: ''
+    name: "",
+    age: "",
+    country: "",
+    culture: "",
   });
+
   const [previewUrl, setPreviewUrl] = useState(null);
 
+  /* --------------------- LOAD USER INFO --------------------- */
   useEffect(() => {
     loadUserInfo();
   }, []);
@@ -24,7 +27,7 @@ export default function Info() {
     try {
       const response = await fetch(`${API_URL}/user/info/1`);
       const data = await response.json();
-      
+
       if (data.success) {
         setUserInfo(data.user);
         setFormData({
@@ -32,73 +35,68 @@ export default function Info() {
           age: data.user.age,
           country: data.user.country,
           culture: data.user.culture,
-          picture: null
+          picture: null,
         });
       }
     } catch (err) {
-      console.error('No user info found:', err);
+      console.error("No user info found:", err);
       setEditing(true);
     } finally {
       setLoading(false);
     }
   };
 
+  /* --------------------- INPUT HANDLING --------------------- */
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handlePictureChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setFormData(prev => ({
-        ...prev,
-        picture: file
-      }));
-      
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewUrl(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
+    if (!file) return;
+
+    setFormData((prev) => ({ ...prev, picture: file }));
+
+    const reader = new FileReader();
+    reader.onloadend = () => setPreviewUrl(reader.result);
+    reader.readAsDataURL(file);
   };
 
+  /* --------------------- SAVE FORM --------------------- */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       if (formData.picture) {
-        const formDataUpload = new FormData();
-        formDataUpload.append('picture', formData.picture);
-        
+        const upload = new FormData();
+        upload.append("picture", formData.picture);
+
         await fetch(`${API_URL}/user/picture`, {
-          method: 'POST',
-          body: formDataUpload
+          method: "POST",
+          body: upload,
         });
       }
 
-      const url = userInfo 
+      const url = userInfo
         ? `${API_URL}/user/info/${userInfo.id}`
         : `${API_URL}/user/info`;
-      
-      const method = userInfo ? 'PUT' : 'POST';
+
+      const method = userInfo ? "PUT" : "POST";
 
       const response = await fetch(url, {
-        method: method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        method,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formData.name,
           age: formData.age,
           country: formData.country,
-          culture: formData.culture
-        })
+          culture: formData.culture,
+        }),
       });
 
       const data = await response.json();
@@ -106,179 +104,168 @@ export default function Info() {
       if (data.success) {
         setUserInfo(data.user);
         setEditing(false);
-        alert('Information saved!');
+        alert("Information saved!");
       }
     } catch (err) {
-      alert('Failed to save');
+      alert("Failed to save");
       console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
+  /* --------------------- LOADING STATE --------------------- */
   if (loading && !userInfo && !editing) {
     return (
-      <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#6B5D52' }}>
-        <p style={{ color: '#FFF' }}>Loading...</p>
+      <main className="page-container bg-main" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <p style={{ color: "#fff", fontSize: "1.5rem" }}>Loading...</p>
       </main>
     );
   }
 
+  /* ===================== UI ===================== */
+
   return (
-    <main style={{
-      minHeight: '100vh',
-      background: '#6B5D52',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px'
-    }}>
-      <div style={{
-        background: '#8B7355',
-        padding: '40px',
-        maxWidth: '500px',
-        width: '100%'
-      }}>
+    <main className="page-container bg-main">
+      <div className="content-box">
+
+        {/* Page Title */}
+        <h1 className="page-title">Account Information</h1>
+
+        {/* Profile Picture */}
+        <div
+          className="avatar"
+          style={{
+            width: "120px",
+            height: "120px",
+            margin: "0 auto 25px",
+            background: previewUrl
+              ? `url(${previewUrl})`
+              : userInfo?.picture
+              ? `url(${API_URL}/user/picture/${userInfo.picture})`
+              : "#d8c4a3",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            borderRadius: "9999px",
+            border: "3px solid #cbb9a3",
+            position: "relative",
+          }}
+        >
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handlePictureChange}
+            style={{
+              opacity: 0,
+              width: "100%",
+              height: "100%",
+              position: "absolute",
+              cursor: "pointer",
+            }}
+          />
+        </div>
+
+        {/* ===================== DISPLAY MODE ===================== */}
         {!editing && userInfo ? (
-          // Display Mode
-          <>
-            {/* Picture Circle */}
-            <div style={{
-              width: '120px',
-              height: '120px',
-              borderRadius: '50%',
-              background: previewUrl ? `url(${previewUrl})` : '#FFFFFF',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              margin: '0 auto 30px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '14px',
-              color: '#999'
-            }}>
-              {!previewUrl && 'picture'}
+          <div className="account-info">
+
+            <div className="account-field">
+              <label className="account-label">Name</label>
+              <p className="account-value">{userInfo.name}</p>
             </div>
 
-            {/* Info Fields */}
-            <input type="text" value={userInfo.name} readOnly style={fieldStyle} />
-            <input type="text" value={userInfo.age} readOnly style={fieldStyle} />
-            <input type="text" value={userInfo.country} readOnly style={fieldStyle} />
-            <input type="text" value={userInfo.culture} readOnly style={fieldStyle} />
+            <div className="account-field">
+              <label className="account-label">Age</label>
+              <p className="account-value">{userInfo.age}</p>
+            </div>
 
-            <button onClick={() => setEditing(true)} style={buttonStyle}>
-              Edit
+            <div className="account-field">
+              <label className="account-label">Country</label>
+              <p className="account-value">{userInfo.country}</p>
+            </div>
+
+            <div className="account-field">
+              <label className="account-label">Culture</label>
+              <p className="account-value">{userInfo.culture}</p>
+            </div>
+
+            <button className="exit-button" onClick={() => setEditing(true)} style={{ marginTop: "20px" }}>
+              Edit Information
             </button>
-          </>
+          </div>
         ) : (
-          // Edit Mode
-          <form onSubmit={handleSubmit}>
-            {/* Picture Upload Circle */}
-            <div style={{
-              width: '120px',
-              height: '120px',
-              borderRadius: '50%',
-              background: previewUrl ? `url(${previewUrl})` : '#FFFFFF',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              margin: '0 auto 30px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '14px',
-              color: '#999',
-              position: 'relative',
-              cursor: 'pointer'
-            }}>
-              {!previewUrl && 'picture'}
+          /* ===================== EDIT MODE ===================== */
+          <form onSubmit={handleSubmit} className="account-info">
+
+            <div className="account-field">
+              <label className="account-label">Name</label>
               <input
-                type="file"
-                accept="image/*"
-                onChange={handlePictureChange}
-                style={{
-                  position: 'absolute',
-                  width: '100%',
-                  height: '100%',
-                  opacity: 0,
-                  cursor: 'pointer'
-                }}
+                type="text"
+                name="name"
+                className="account-value"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+                style={{ background: "#fff" }}
               />
             </div>
 
-            {/* Input Fields */}
-            <input 
-              type="text" 
-              name="name" 
-              value={formData.name} 
-              onChange={handleInputChange}
-              placeholder="name"
-              required
-              style={fieldStyle} 
-            />
-            <input 
-              type="number" 
-              name="age" 
-              value={formData.age} 
-              onChange={handleInputChange}
-              placeholder="age"
-              required
-              style={fieldStyle} 
-            />
-            <input 
-              type="text" 
-              name="country" 
-              value={formData.country} 
-              onChange={handleInputChange}
-              placeholder="country"
-              required
-              style={fieldStyle} 
-            />
-            <input 
-              type="text" 
-              name="culture" 
-              value={formData.culture} 
-              onChange={handleInputChange}
-              placeholder="culture"
-              required
-              style={fieldStyle} 
-            />
-
-            <div style={{ display: 'flex', gap: '10px' }}>
-              {userInfo && (
-                <button type="button" onClick={() => setEditing(false)} style={{ ...buttonStyle, background: '#A89B8E' }}>
-                  Cancel
-                </button>
-              )}
-              <button type="submit" disabled={loading} style={buttonStyle}>
-                {loading ? 'Saving...' : 'Save'}
-              </button>
+            <div className="account-field">
+              <label className="account-label">Age</label>
+              <input
+                type="number"
+                name="age"
+                className="account-value"
+                value={formData.age}
+                onChange={handleInputChange}
+                required
+                style={{ background: "#fff" }}
+              />
             </div>
+
+            <div className="account-field">
+              <label className="account-label">Country</label>
+              <input
+                type="text"
+                name="country"
+                className="account-value"
+                value={formData.country}
+                onChange={handleInputChange}
+                required
+                style={{ background: "#fff" }}
+              />
+            </div>
+
+            <div className="account-field">
+              <label className="account-label">Culture</label>
+              <input
+                type="text"
+                name="culture"
+                className="account-value"
+                value={formData.culture}
+                onChange={handleInputChange}
+                required
+                style={{ background: "#fff" }}
+              />
+            </div>
+
+            <button className="exit-button" type="submit" disabled={loading}>
+              {loading ? "Saving..." : "Save"}
+            </button>
+
+            {userInfo && (
+              <button
+                className="exit-button"
+                type="button"
+                style={{ background: "#a89a8b" }}
+                onClick={() => setEditing(false)}
+              >
+                Cancel
+              </button>
+            )}
           </form>
         )}
       </div>
     </main>
   );
 }
-
-// Styles
-const fieldStyle = {
-  width: '100%',
-  padding: '12px',
-  background: '#FFFFFF',
-  border: 'none',
-  marginBottom: '15px',
-  fontSize: '14px',
-  textAlign: 'center',
-  boxSizing: 'border-box'
-};
-
-const buttonStyle = {
-  width: '100%',
-  padding: '12px',
-  background: '#6B5D52',
-  color: '#FFFFFF',
-  border: 'none',
-  fontSize: '14px',
-  cursor: 'pointer',
-  marginTop: '10px'
-};

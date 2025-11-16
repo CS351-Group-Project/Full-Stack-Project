@@ -1,19 +1,19 @@
 import React, { useState } from "react";
+import "../App.css";
 
 export default function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState("culture");
-  const [selectedDates, setSelectedDates] = useState([20, 25]);
 
   const categories = [
-    { id: "culture", label: "culture" },
-    { id: "location", label: "location" },
-    { id: "place", label: "place" },
+    { id: "culture", label: "Culture" },
+    { id: "location", label: "Location" },
+    { id: "place", label: "Place" },
   ];
 
   const exploreItems = [
-    { id: 1, image: "Music & Dance", color: "bg-gradient-to-br from-purple-400 to-pink-400" },
-    { id: 2, image: "Traditional Arts", color: "bg-gradient-to-br from-blue-400 to-cyan-400" },
-    { id: 3, image: "Cuisine", color: "bg-gradient-to-br from-orange-400 to-red-400" },
+    { id: 1, label: "Music & Dance" },
+    { id: 2, label: "Traditional Arts" },
+    { id: 3, label: "Cuisine" },
   ];
 
   const events = [
@@ -23,141 +23,62 @@ export default function Dashboard() {
     { id: 4, date: 25, title: "Culinary Heritage Tour", location: "Historic District", attendees: 78 },
   ];
 
-  const getDaysInMonth = () => {
-    return Array.from({ length: 30 }, (_, i) => i + 1);
-  };
-
-  const toggleDate = (day) => {
-    if (selectedDates.includes(day)) {
-      setSelectedDates(selectedDates.filter((d) => d !== day));
-    } else {
-      setSelectedDates([...selectedDates, day]);
-    }
-  };
-
-  const filteredEvents = events.filter((event) =>
-    selectedDates.includes(event.date)
-  );
-
   return (
-    <div
-      className="min-h-screen p-8 flex items-center justify-center relative"
-      style={{
-        fontFamily: "'Times New Roman', Times, serif",
-        backgroundImage: 'url("/images.jpeg")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-        opacity: 0.95,
-      }}
-    >
-      <div className="max-w-7xl w-full relative z-10">
-        
+    <main className="page-container bg-main">
+      <div className="content-box">
+        {/* PAGE TITLE */}
+        <h1 className="page-title">Dashboard</h1>
+
         {/* CATEGORY BUTTONS */}
-        <div className="rounded-lg p-8 mb-8">
-          <div className="pt-6">
-            <div className="flex justify-center gap-8 mb-8">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-6 py-3 rounded-lg transition-all ${
-                    selectedCategory === cat.id
-                      ? "bg-gray-800 text-white shadow-lg"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
-
-            {/* CALENDAR */}
-            <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                calendar:
-              </h3>
-              <div className="grid grid-cols-5 gap-2">
-                {getDaysInMonth().map((day) => (
-                  <button
-                    key={day}
-                    onClick={() => toggleDate(day)}
-                    className={`p-6 border-2 transition-all ${
-                      selectedDates.includes(day)
-                        ? "bg-gray-300 border-white shadow-md"
-                        : "bg-gray-100 border-white hover:bg-gray-200"
-                    }`}
-                  >
-                    <div className="text-lg font-medium text-gray-800">
-                      {day}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* EVENTS LIST */}
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                events:
-              </h3>
-              <div className="bg-gray-200 rounded-lg p-6 min-h-[200px]">
-                {filteredEvents.length > 0 ? (
-                  <div className="space-y-4">
-                    {filteredEvents.map((event) => (
-                      <div
-                        key={event.id}
-                        className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow"
-                      >
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-gray-800 mb-2">
-                              {event.title}
-                            </h4>
-                            <div className="flex items-center gap-4 text-sm text-gray-600">
-                              <div className="flex items-center gap-1">
-                                <span>📍</span>
-                                {event.location}
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <span>👥</span>
-                                {event.attendees} attending
-                              </div>
-                            </div>
-                          </div>
-                          <div className="bg-gray-800 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Day {event.date}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-center h-full text-gray-500">
-                    Select dates on the calendar to see events
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
+        <div className="toolbar" style={{ marginBottom: "2rem" }}>
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setSelectedCategory(cat.id)}
+              style={{
+                backgroundColor: selectedCategory === cat.id ? "#a1845f" : "#fff9f3",
+                color: selectedCategory === cat.id ? "#fff" : "#4b3d33",
+                border: "1px solid #d8c4a3",
+              }}
+            >
+              {cat.label}
+            </button>
+          ))}
         </div>
 
-        {/* EXPLORE SECTION */}
-        <div className="bg-white bg-opacity-90 rounded-lg shadow-lg p-8">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">explore:</h3>
-          <div className="flex gap-4 items-center">
-            {exploreItems.map((item) => (
-              <div
-                key={item.id}
-                className={`${item.color} rounded-lg p-8 flex-1 h-32 flex items-center justify-center text-white font-semibold shadow-lg hover:shadow-xl transition-shadow cursor-pointer`}
-              >
-                {item.image}
+        {/* EVENTS SECTION */}
+        <div style={{ marginBottom: "2rem" }}>
+          <h2 className="page-title" style={{ fontSize: "1.5rem" }}>
+            Upcoming Events
+          </h2>
+
+          <div className="stack" style={{ marginTop: "1rem" }}>
+            {events.map((event) => (
+              <div key={event.id} className="card" style={{ padding: "1rem" }}>
+                <h4 style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>
+                  {event.title}
+                </h4>
+                <p style={{ marginBottom: "0.25rem" }}>📅 Day {event.date}</p>
+                <p style={{ marginBottom: "0.25rem" }}>📍 {event.location}</p>
+                <p>👥 {event.attendees} attending</p>
               </div>
             ))}
           </div>
         </div>
 
+        {/* EXPLORE SECTION */}
+        <h2 className="page-title" style={{ fontSize: "1.5rem" }}>
+          Explore Culture
+        </h2>
+
+        <div className="grid hub" style={{ marginTop: "1rem" }}>
+          {exploreItems.map((item) => (
+            <div key={item.id} className="tile" style={{ height: "100px" }}>
+              {item.label}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -1,18 +1,37 @@
 import React from "react";
+import "../App.css";
 
-export default function Calendar() {
-  // static 7x6 grid with numbers 1..30
+export default function Calendar({ selectedDates, toggleDate }) {
   const days = Array.from({ length: 30 }, (_, i) => i + 1);
-  const blanks = Array.from({ length: 7 }, () => "");
+
   return (
-    <div className="cal">
-      <div className="cal-head"><strong>calendar</strong></div>
-      <div className="cal-grid">
-        {["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map((d)=>(
-          <div key={d} className="cal-dow">{d}</div>
-        ))}
-        {blanks.map((_,i)=>(<div key={`b${i}`} className="cal-cell muted" />))}
-        {days.map((d)=>(<div key={d} className="cal-cell">{d}</div>))}
+    <div>
+      <h3 className="page-title" style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>
+        Calendar
+      </h3>
+
+      <div className="calendar-container">
+        <div className="calendar-grid">
+          {days.map((day) => {
+            const isSelected = selectedDates.includes(day);
+
+            return (
+              <div
+                key={day}
+                onClick={() => toggleDate(day)}
+                className={`calendar-cell ${
+                  isSelected ? "calendar-cell-event" : "calendar-cell-normal"
+                }`}
+                style={{
+                  cursor: "pointer",
+                  userSelect: "none",
+                }}
+              >
+                <div className="calendar-cell-text">{day}</div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
