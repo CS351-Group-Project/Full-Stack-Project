@@ -1,22 +1,32 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
+const links = [
+  { to: "/hub", label: "Hub" },
+  { to: "/dashboard", label: "Dashboard" },
+  { to: "/events", label: "Events" },
+  { to: "/explore", label: "Explore" },
+  { to: "/profile", label: "Profile" },
+  { to: "/info", label: "Info" },
+];
 
 export default function NavBar() {
-  const { pathname } = useLocation();
-  const Tab = ({ to, label }) => (
-    <Link className={`nav-link ${pathname === to ? "active" : ""}`} to={to}>
-      {label}
-    </Link>
-  );
   return (
-    <nav className="nav">
-      <div className="grow">
-        <Tab to="/hub" label="hub" />
-        <Tab to="/dashboard" label="events" />
-        <Tab to="/explore" label="explore" />
-        <Tab to="/Info" label="profile" />
-      </div>
-      <Tab to="/login" label="exit/login" />
-    </nav>
+    <header className="navbar">
+      <div className="navbar-brand">CultureConnect</div>
+      <nav className="navbar-links">
+        {links.map((link) => (
+          <NavLink
+            key={link.to}
+            to={link.to}
+            className={({ isActive }) =>
+              "nav-link" + (isActive ? " active" : "")
+            }
+          >
+            {link.label}
+          </NavLink>
+        ))}
+      </nav>
+    </header>
   );
 }

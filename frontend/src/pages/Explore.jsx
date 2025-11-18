@@ -1,51 +1,105 @@
-import React, { useState } from "react";
-import "../App.css";
+import React, { useEffect, useState } from "react";
+import { apiGet } from "../api";
 import Calendar from "../components/Calendar";
 
 export default function Explore() {
   const [selectedDates, setSelectedDates] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const toggleDate = (day) => {
     setSelectedDates((prev) =>
-      prev.includes(day)
-        ? prev.filter((d) => d !== day)
-        : [...prev, day]
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
     );
   };
 
-  const exploreItems = [
-    { id: 1, label: "Music & Dance" },
-    { id: 2, label: "Traditional Arts" },
-    { id: 3, label: "Cuisine" },
-  ];
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const data = await apiGet("/events/explore/");
+        setEvents(data.events || []);
+      } catch (e) {
+        console.error("Failed to load explore events", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, []);
 
   return (
-    <main className="page-container bg-main">
-      <div className="content-box">
-        {/* PAGE TITLE */}
-        <h1 className="page-title">Explore Culture</h1>
+    <div className="page">
+      <h1 className="page-title">Explore</h1>
 
-        {/* CALENDAR REPLACING TOP SQUARES */}
-        <div style={{ marginBottom: "2rem" }}>
-          <Calendar
-            selectedDates={selectedDates}
-            toggleDate={toggleDate}
-          />
+      <div style={{ display: "grid", gridTemplateColumns: "260px 1fr", gap: "1rem" }}>
+        <div>
+          <Calendar selectedDates={selectedDates} toggleDate={toggleDate} />
+          <div style={{ marginTop: "1rem" }} className="grid grid-3">
+            <div className="tile">Music & Dance</div>
+            <div className="tile">Arts & Crafts</div>
+            <div className="tile">Cuisine</div>
+          </div>
         </div>
 
-        {/* EXPLORE SECTION */}
-        <h2 className="page-title" style={{ fontSize: "1.5rem" }}>
-          Explore Categories
-        </h2>
-
-        <div className="grid hub" style={{ marginTop: "1rem" }}>
-          {exploreItems.map((item) => (
-            <div key={item.id} className="tile" style={{ height: "100px" }}>
-              {item.label}
-            </div>
-          ))}
+        <div>
+          <h2 style={{ fontSize: "1.1rem" }}>
+            Events from our app and other websites
+          </h2>
+          {loading ? (
+            <p>Loading...</p>
+          ) : events.length === 0 ? (
+            <p>No events found.</p>
+          ) : (
+            events.map((ev, idx) => (
+              <div key={idx} className="event-card">
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <strong>{ev.title}</strong>
+                  <span
+                    style={{
+                      padding: "0.2rem 0.5rem",
+                      borderRadius: "999px",
+                      fontSize: "0.7rem",
+                      backgroundColor:
+                        ev.source === "internal" ? "#10b981" : "#e5e7eb",
+                      color: ev.source === "internal" ? "#065f46" : "#374151",
+                    }}
+                  >
+                    {ev.source === "internal" ? "Our Event" : "External"}
+                  </span>
+                </div>
+                <p style={{ margin: "0.15rem 0", color: "#4b5563" }}>
+                  {ev.culture} • {ev.location}
+                </p>
+                <p style={{ margin: "0.15rem 0", color: "#6b7280" }}>
+                  📅 {ev.start_date}
+                  {ev.end_date && ev.end_date !== ev.start_date
+                    ? ` – ${ev.end_date}`
+                    : ""}
+                </p>
+                <p style={{ margin: "0.15rem 0", color: "#6b7280" }}>
+                  📍 {ev.place || "Venue TBA"}
+                </p>
+                <p style={{ margin: "0.3rem 0", fontSize: "0.85rem" }}>
+                  {ev.description}
+                </p>
+                <p style={{ margin: "0.15rem 0", color: "#6b7280", fontSize: "0.85rem" }}>
+                  👥 {ev.attendees} attending
+                </p>
+                {ev.source === "external" && ev.external_url && (
+                  <a
+                    href={ev.external_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-ghost"
+                  >
+                    View on external site
+                  </a>
+                )}
+              </div>
+            ))
+          )}
         </div>
       </div>
-    </main>
+    </div>
   );
 }
