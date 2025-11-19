@@ -1,8 +1,8 @@
 body {
     margin: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background-color: #f3f4f6;
-    color: #111827;
+    background-color: #E77E6E;
+    color: #ffffff;
   }
   
   a {
@@ -26,9 +26,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #111827;
+    background-color: #321849;
     color: white;
     padding: 0.75rem 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
   .navbar-brand {
@@ -45,25 +46,32 @@ body {
     font-size: 0.9rem;
     padding: 0.25rem 0.5rem;
     border-radius: 999px;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(147, 22, 114, 0.5);
   }
   
   .nav-link.active {
-    background-color: #f59e0b;
-    color: #111827;
+    background-color: #E73E65;
+    color: white;
   }
   
   .page {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.95);
     border-radius: 0.75rem;
     padding: 1.5rem;
-    box-shadow: 0 10px 15px rgba(15, 23, 42, 0.09);
+    box-shadow: 0 10px 15px rgba(50, 24, 73, 0.2);
     margin-top: 1rem;
+    color: #321849;
   }
   
   .page-title {
     margin-top: 0;
     margin-bottom: 1rem;
     font-size: 1.5rem;
+    color: #321849;
   }
   
   .grid {
@@ -77,10 +85,11 @@ body {
   
   .tile {
     padding: 0.75rem 1rem;
-    background-color: #f9fafb;
+    background: linear-gradient(135deg, rgba(147, 22, 114, 0.1) 0%, rgba(231, 62, 101, 0.1) 100%);
     border-radius: 0.75rem;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #E73E65;
     font-size: 0.9rem;
+    color: #321849;
   }
   
   .btn {
@@ -89,29 +98,46 @@ body {
     border: none;
     cursor: pointer;
     font-size: 0.85rem;
+    transition: all 0.3s ease;
   }
   
   .btn-primary {
-    background-color: #f59e0b;
-    color: #111827;
+    background: linear-gradient(135deg, #931672 0%, #E73E65 100%);
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #E73E65 0%, #EE5D5F 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(147, 22, 114, 0.3);
   }
   
   .btn-secondary {
-    background-color: #e5e7eb;
-    color: #111827;
+    background-color: #E77E6E;
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #EE5D5F;
   }
   
   .btn-ghost {
     background-color: transparent;
-    border: 1px solid #d1d5db;
+    border: 1px solid #931672;
+    color: #321849;
+  }
+  
+  .btn-ghost:hover {
+    background-color: rgba(147, 22, 114, 0.1);
   }
   
   .event-card {
     border-radius: 0.75rem;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #E73E65;
     padding: 0.9rem 1rem;
     margin-bottom: 0.75rem;
-    background-color: #f9fafb;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(231, 126, 110, 0.1) 100%);
+    color: #321849;
   }
   
   .form-row {
@@ -124,38 +150,56 @@ body {
   .form-row label {
     margin-bottom: 0.25rem;
     font-weight: 500;
+    color: #321849;
   }
   
   .form-row input,
   .form-row select,
   .form-row textarea {
     border-radius: 0.5rem;
-    border: 1px solid #d1d5db;
+    border: 1px solid #931672;
     padding: 0.4rem 0.6rem;
     font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus {
+    outline: none;
+    border-color: #E73E65;
+    box-shadow: 0 0 0 3px rgba(231, 62, 101, 0.1);
   }
   
   .calendar {
     border-radius: 0.75rem;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #E73E65;
     padding: 0.75rem;
-    background-color: #f9fafb;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(231, 126, 110, 0.1) 100%);
     font-size: 0.85rem;
+    color: #321849;
   }
+  
   .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 0.2rem;
     margin-top: 0.4rem;
   }
+  
   .calendar-day {
     padding: 0.25rem;
     text-align: center;
     border-radius: 0.25rem;
     cursor: pointer;
-  }
-  .calendar-day.selected {
-    background-color: #f59e0b;
-    color: #111827;
+    transition: all 0.3s ease;
   }
   
+  .calendar-day:hover {
+    background-color: rgba(147, 22, 114, 0.2);
+  }
+  
+  .calendar-day.selected {
+    background: linear-gradient(135deg, #931672 0%, #E73E65 100%);
+    color: white;
+  }
