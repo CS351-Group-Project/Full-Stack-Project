@@ -1,5 +1,7 @@
 import { API_URL } from "./App";
 
+
+
 // Generic GET
 export async function apiGet(path) {
   const res = await fetch(`${API_URL}${path}`);
@@ -28,6 +30,7 @@ export async function apiPut(path, data) {
   if (!res.ok) throw new Error(`PUT ${path} failed: ${res.status}`);
   return res.json();
 }
+
 
 // File upload (for profile picture)
 export async function apiUploadPicture(file) {

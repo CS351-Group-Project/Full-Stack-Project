@@ -6,7 +6,6 @@ import Dashboard from "./pages/Dashboard";
 import Events from "./pages/Events";
 import Explore from "./pages/Explore";
 import Profile from "./pages/Profile";
-import Info from "./pages/Info";
 import About from "./pages/About";
 import Hub from "./pages/Hub";
 import LoginPage from "./pages/LoginPage";
@@ -25,7 +24,6 @@ function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/info" element={<Info />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<LoginPage />} />
         </Routes>

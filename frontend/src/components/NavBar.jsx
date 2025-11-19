@@ -7,8 +7,8 @@ const links = [
   { to: "/events", label: "Events" },
   { to: "/explore", label: "Explore" },
   { to: "/profile", label: "Profile" },
-  { to: "/info", label: "Info" },
 ];
+
 
 export default function NavBar() {
   return (

@@ -1,4 +1,9 @@
 # events/views.py
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
 from datetime import date, datetime
 import os
 
@@ -342,3 +347,97 @@ class EventViewSet(viewsets.ModelViewSet):
             combined.append(data)
 
         return Response({"events": combined})
+
+@method_decorator(csrf_exempt, name="dispatch")
+class RegisterView(APIView):
+    """
+    POST /api/auth/register
+
+    Body JSON:
+    {
+      "username": "...",
+      "password": "..."
+    }
+    """
+
+    def post(self, request):
+        username = request.data.get("username", "").strip()
+        password = request.data.get("password", "")
+
+        # Basic validation
+        if not username or not password:
+            return Response(
+                {"success": False, "error": "Username and password are required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if len(username) < 3:
+            return Response(
+                {"success": False, "error": "Username must be at least 3 characters."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if len(password) < 6:
+            return Response(
+                {"success": False, "error": "Password must be at least 6 characters."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if User.objects.filter(username=username).exists():
+            return Response(
+                {"success": False, "error": "Username is already taken."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        user = User(username=username)
+        user.set_password(password)
+        user.save()
+
+        return Response(
+            {"success": True, "message": "User registered successfully."},
+            status=status.HTTP_201_CREATED,
+        )
+
+
+@method_decorator(csrf_exempt, name="dispatch")
+class LoginView(APIView):
+    """
+    POST /api/auth/login
+
+    Body JSON:
+    {
+      "username": "...",
+      "password": "..."
+    }
+
+    Returns success flag and basic user info if credentials are valid.
+    """
+
+    def post(self, request):
+        username = request.data.get("username", "").strip()
+        password = request.data.get("password", "")
+
+        if not username or not password:
+            return Response(
+                {"success": False, "error": "Username and password are required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        user = authenticate(username=username, password=password)
+        if user is None:
+            return Response(
+                {"success": False, "error": "Invalid username or password."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # For this project we do not issue tokens; just return user info.
+        return Response(
+            {
+                "success": True,
+                "message": "Login successful.",
+                "user": {
+                    "id": user.id,
+                    "username": user.username,
+                },
+            }
+        )
