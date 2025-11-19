@@ -37,12 +37,6 @@ During week of 10/26:
     * Add a basic map/location feature for restaurants.
 
 During week of 11/2:
-* Interactivity & Storytelling Layer:
-    * Add features for filtering/searching dishes.
-    * Experiment with ways to make storytelling more engaging like: pop-up narratives, personal anecdotes, audio snippets
-    * Gather feedback on whether the “storytelling” feels authentic and immersive.
-
-During week of 11/9:
 * Refinement & Polish:
     * Focus on visual design and cultural expression (fonts, colors, layout that reflect Vietnamese aesthetics).
     * Fix weak points in functionality (bugs, performance).
@@ -247,3 +241,10 @@ This project captures technical learning expectations and cultural engagement cr
 **Q8: How will you ensure your deployment is reliable and easy to update?**
 
 -> From our research, it seems that CI/CD piplines will be useful to automate deployment.
+
+Current progress:
+Week 12:
+Mithil, Saanvi, and Deepikka worked on polishing the frontend and making it as per the design posted on the Figma Wireframe also including other features when necessary.
+
+Week 13:
+Saamit worked on the integration of the backed and ensuring it worked. The frontend changed quite a bit in the process. Saanvi went back and made changes to the frontend to make it match the design we thought of.
