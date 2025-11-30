@@ -248,3 +248,6 @@ Mithil, Saanvi, and Deepikka worked on polishing the frontend and making it as p
 
 Week 13:
 Saamit worked on the integration of the backed and ensuring it worked. The frontend changed quite a bit in the process. Saanvi went back and made changes to the frontend to make it match the design we thought of.
+
+npm start
+python manage.py runserver       ``

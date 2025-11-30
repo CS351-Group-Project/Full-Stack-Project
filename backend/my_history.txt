@@ -1,0 +1,16 @@
+ 1727  clear
+ 1728   pip install django
+ 1729  python3 -m pip install django
+ 1730  clear
+ 1731  python3 -m pip install django
+ 1732  clear
+ 1733  source "/Users/samith_folder/Documents/school/junior sem 1/CS351/Full-Stack-Project/venv/bin/activate"
+ 1734  clear
+ 1735  python3 manage.py runserver\n
+ 1736  cd backend
+ 1737  cleare
+ 1738  clear
+ 1739  python3 manage.py runserver\n
+ 1740  clear
+ 1741  python manage.py runserver\n
+ 1742  history
