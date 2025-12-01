@@ -29,24 +29,53 @@ from .algorithms.bloom_filter import BloomFilter
 class UserProfileViewSet(viewsets.ViewSet):
     """
     Handles:
-    - GET /api/user/info/<id>/
-    - POST /api/user/info/
-    - PUT /api/user/info/<id>/
+    - GET /api/user/info/          (list all profiles)
+    - GET /api/user/info/<id>/     (retrieve by profile id)
+    - POST /api/user/info/         (create profile for a given user_id)
+    - PUT /api/user/info/<id>/     (update profile)
     """
 
+    def list(self, request):
+        profiles = UserProfile.objects.select_related("user").all()
+        serializer = UserProfileSerializer(profiles, many=True)
+        return Response({"success": True, "users": serializer.data})
+
     def retrieve(self, request, pk=None):
-        # GET /api/user/info/<id>/
-        user = get_object_or_404(UserProfile, pk=pk)
-        serializer = UserProfileSerializer(user)
+        profile = get_object_or_404(UserProfile, pk=pk)
+        serializer = UserProfileSerializer(profile)
         return Response({"success": True, "user": serializer.data})
 
     def create(self, request):
-        # POST /api/user/info/
+        """
+        Expects:
+        {
+          "user_id": 1,
+          "name": "...",
+          "age": ...,
+          "country": "...",
+          "culture": "..."
+        }
+        """
+        user_id = request.data.get("user_id")
+        if not user_id:
+            return Response(
+                {"success": False, "error": "user_id is required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        user = get_object_or_404(User, pk=user_id)
+
+        if hasattr(user, "profile"):
+            return Response(
+                {"success": False, "error": "Profile already exists for this user."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
         serializer = UserProfileSerializer(data=request.data)
         if serializer.is_valid():
-            user = serializer.save()
+            profile = serializer.save(user=user)
             return Response(
-                {"success": True, "user": UserProfileSerializer(user).data},
+                {"success": True, "user": UserProfileSerializer(profile).data},
                 status=status.HTTP_201_CREATED,
             )
         return Response(
@@ -55,37 +84,48 @@ class UserProfileViewSet(viewsets.ViewSet):
         )
 
     def update(self, request, pk=None):
-        # PUT /api/user/info/<id>/
-        user = get_object_or_404(UserProfile, pk=pk)
-        serializer = UserProfileSerializer(user, data=request.data)
+        profile = get_object_or_404(UserProfile, pk=pk)
+        # partial=True allows sending only some fields
+        serializer = UserProfileSerializer(profile, data=request.data, partial=True)
         if serializer.is_valid():
-            user = serializer.save()
-            return Response({"success": True, "user": UserProfileSerializer(user).data})
+            profile = serializer.save()
+            return Response(
+                {"success": True, "user": UserProfileSerializer(profile).data}
+            )
+        # If invalid (e.g. age not a number), return details
         return Response(
             {"success": False, "errors": serializer.errors},
             status=status.HTTP_400_BAD_REQUEST,
         )
 
 
+
 class UserPictureUploadView(APIView):
     """
     POST /api/user/picture
-    Body: form-data with field 'picture' (file)
+
+    Body: form-data with fields:
+      - 'picture' (file)
+      - 'user_id' (int)  <-- which auth user this picture belongs to
     """
 
     parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request):
-        # For simplicity, assume a single user with id=1
-        user, _ = UserProfile.objects.get_or_create(
-            id=1,
-            defaults={
-                "name": "User",
-                "age": 20,
-                "country": "Unknown",
-                "culture": "Unknown",
-            },
-        )
+        user_id = request.data.get("user_id")
+        if not user_id:
+            return Response(
+                {"success": False, "error": "user_id is required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        user = get_object_or_404(User, pk=user_id)
+        profile = getattr(user, "profile", None)
+        if profile is None:
+            return Response(
+                {"success": False, "error": "Profile does not exist for this user."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         picture = request.FILES.get("picture")
         if not picture:
@@ -94,10 +134,9 @@ class UserPictureUploadView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        user.picture = picture
-        user.save()
-        return Response({"success": True, "user": UserProfileSerializer(user).data})
-
+        profile.picture = picture
+        profile.save()
+        return Response({"success": True, "user": UserProfileSerializer(profile).data})
 
 
 class UserPictureServeView(View):
@@ -179,12 +218,7 @@ class EventViewSet(viewsets.ModelViewSet):
     def recommended(self, request):
         """
         GET /api/events/recommended/?culture=...&location=...&date=YYYY-MM-DD&limit=10
-
-        Uses:
-        - BloomFilter to quickly check if any events exist for (culture, location)
-        - BinaryHeapPriorityQueue to rank events by a score
         """
-
         culture = request.query_params.get("culture")
         location = request.query_params.get("location")
         date_str = request.query_params.get("date")
@@ -197,7 +231,6 @@ class EventViewSet(viewsets.ModelViewSet):
 
         all_events = Event.objects.all()
 
-        # 1) Build Bloom filter with all (culture, location) combos
         count = max(1, all_events.count())
         bloom = BloomFilter(expected_items=count, false_positive_rate=0.01)
 
@@ -205,7 +238,6 @@ class EventViewSet(viewsets.ModelViewSet):
             key = f"{ev.culture.lower()}|{ev.location.lower()}"
             bloom.add(key)
 
-        # 2) Early rejection if this combination is definitely not present
         if culture and location:
             combo = f"{culture.lower()}|{location.lower()}"
             if combo not in bloom:
@@ -216,7 +248,6 @@ class EventViewSet(viewsets.ModelViewSet):
                     }
                 )
 
-        # 3) Filter candidates using simple DB filters
         qs = all_events
         if culture:
             qs = qs.filter(culture__iexact=culture)
@@ -225,12 +256,10 @@ class EventViewSet(viewsets.ModelViewSet):
         if target_date:
             qs = qs.filter(start_date__lte=target_date, end_date__gte=target_date)
 
-        # 4) Rank candidates with priority queue (min-heap)
         pq = BinaryHeapPriorityQueue()
         today = date.today()
 
         def score(ev: Event) -> int:
-            # Lower score = higher priority.
             base_date = target_date or today
             days_diff = abs((ev.start_date - base_date).days)
 
@@ -255,13 +284,7 @@ class EventViewSet(viewsets.ModelViewSet):
     def explore(self, request):
         """
         GET /api/events/explore/?culture=...&location=...&date=YYYY-MM-DD&limit=10
-
-        Combines:
-        - internal events (source='internal')
-        - external events (source='external')
-        Uses BinaryHeapPriorityQueue to prioritize our events.
         """
-
         culture = request.query_params.get("culture")
         location = request.query_params.get("location")
         date_str = request.query_params.get("date")
@@ -274,7 +297,6 @@ class EventViewSet(viewsets.ModelViewSet):
 
         base_date = target_date or date.today()
 
-        # 1) Internal events
         internal_qs = Event.objects.all()
         if culture:
             internal_qs = internal_qs.filter(culture__iexact=culture)
@@ -286,14 +308,12 @@ class EventViewSet(viewsets.ModelViewSet):
                 end_date__gte=target_date,
             )
 
-        # 2) External events
         external_events = get_external_events(
             culture=culture,
             location=location,
             target_date=target_date,
         )
 
-        # 3) Rank with priority queue
         pq = BinaryHeapPriorityQueue()
 
         def score_internal(ev: Event) -> int:
@@ -302,7 +322,6 @@ class EventViewSet(viewsets.ModelViewSet):
             if ev.is_favorite:
                 s -= 2
             s -= min(ev.attendees // 100, 5)
-            # bonus so our events are given more priority
             s -= 5
             return s
 
@@ -348,6 +367,9 @@ class EventViewSet(viewsets.ModelViewSet):
 
         return Response({"events": combined})
 
+
+
+
 @method_decorator(csrf_exempt, name="dispatch")
 class RegisterView(APIView):
     """
@@ -356,13 +378,20 @@ class RegisterView(APIView):
     Body JSON:
     {
       "username": "...",
-      "password": "..."
+      "password": "...",
+      "age": 21,               # optional
+      "country": "India",      # optional
+      "culture": "South Indian" # optional
     }
     """
 
     def post(self, request):
         username = request.data.get("username", "").strip()
         password = request.data.get("password", "")
+
+        age = request.data.get("age")
+        country = request.data.get("country") or "Unknown"
+        culture = request.data.get("culture") or "Unknown"
 
         # Basic validation
         if not username or not password:
@@ -389,26 +418,44 @@ class RegisterView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
+        # Create user
         user = User(username=username)
         user.set_password(password)
         user.save()
 
-        return Response(
-            {"success": True, "message": "User registered successfully."},
-            status=status.HTTP_201_CREATED,
+        # Normalize age
+        try:
+            age_value = int(age) if age is not None else 18
+        except (TypeError, ValueError):
+            age_value = 18
+
+        # Create profile using provided fields (or defaults)
+        profile = UserProfile.objects.create(
+            user=user,
+            name=username,
+            age=age_value,
+            country=country,
+            culture=culture,
         )
 
+        return Response(
+            {
+                "success": True,
+                "message": "User registered successfully.",
+                "user": {
+                    "id": user.id,
+                    "username": user.username,
+                    "profile": UserProfileSerializer(profile).data,
+                },
+            },
+            status=status.HTTP_201_CREATED,
+        )
 
 @method_decorator(csrf_exempt, name="dispatch")
 class LoginView(APIView):
     """
     POST /api/auth/login
-
-    Body JSON:
-    {
-      "username": "...",
-      "password": "..."
-    }
+    Body JSON: { "username": "...", "password": "..." }
 
     Returns success flag and basic user info if credentials are valid.
     """
@@ -430,7 +477,9 @@ class LoginView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # For this project we do not issue tokens; just return user info.
+        profile = getattr(user, "profile", None)
+        profile_data = UserProfileSerializer(profile).data if profile else None
+
         return Response(
             {
                 "success": True,
@@ -438,6 +487,7 @@ class LoginView(APIView):
                 "user": {
                     "id": user.id,
                     "username": user.username,
+                    "profile": profile_data,
                 },
             }
         )
