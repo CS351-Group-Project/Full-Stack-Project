@@ -1,17 +1,20 @@
 # events/models.py
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
-    # For simplicity we treat this as a “single user” profile object.
+    # Each Django auth user gets one profile
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+
     name = models.CharField(max_length=100)
     age = models.PositiveIntegerField()
     country = models.CharField(max_length=100)
     culture = models.CharField(max_length=100)
-    picture = models.ImageField(upload_to='profiles/', null=True, blank=True)
+    picture = models.ImageField(upload_to="profiles/", null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.user.username})"
 
 
 class Event(models.Model):
