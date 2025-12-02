@@ -130,7 +130,12 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
-export const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8000/api";
+const prodApi = "https://full-stack-project-backend-9xys.onrender.com/api";
+const devApi = "http://127.0.0.1:8000/api";
+
+export const API_URL =
+  process.env.NODE_ENV === "production" ? prodApi : devApi;
+
 console.log("API_URL:", API_URL);
 
 function App() {
