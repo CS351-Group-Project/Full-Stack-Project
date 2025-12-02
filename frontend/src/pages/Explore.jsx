@@ -193,7 +193,6 @@
 
 
 
-
 import React, { useEffect, useState } from "react";
 import { apiGet } from "../api";
 import Calendar from "../components/Calendar";
@@ -260,13 +259,7 @@ export default function Explore() {
     <div className="page">
       <h1 className="page-title">Explore</h1>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "260px 1fr",
-          gap: "1rem",
-        }}
-      >
+      <div className="explore-layout">
         <div>
           <Calendar selectedDates={selectedDates} toggleDate={toggleDate} />
 
