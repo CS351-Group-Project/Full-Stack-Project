@@ -469,7 +469,7 @@ export default function Profile({ authUser }) {
               </div>
 
               <div className="form-row">
-                <label htmlFor="country">Country</label>
+                <label htmlFor="country">Location</label>
                 <input
                   id="country"
                   name="country"
