@@ -1,4 +1,3 @@
-// src/pages/Explore.jsx
 import React, { useEffect, useState } from "react";
 import { apiGet } from "../api";
 import Calendar from "../components/Calendar";
@@ -8,7 +7,7 @@ export default function Explore() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // NEW: filters for culture + location
+  // filters for culture + location
   const [filters, setFilters] = useState({
     culture: "",
     location: "",
@@ -31,8 +30,7 @@ export default function Explore() {
       // if (opts.date) params.append("date", opts.date);
 
       const query = params.toString();
-      const url =
-        "/events/explore/" + (query ? `?${query}` : "");
+      const url = "/events/explore/" + (query ? `?${query}` : "");
 
       const data = await apiGet(url);
       setEvents(data.events || []);
@@ -76,7 +74,7 @@ export default function Explore() {
         <div>
           <Calendar selectedDates={selectedDates} toggleDate={toggleDate} />
 
-          {/* NEW: simple filter form */}
+          {/* filter form */}
           <div style={{ marginTop: "1rem" }}>
             <div className="form-row">
               <label htmlFor="culture">Culture</label>
@@ -107,7 +105,7 @@ export default function Explore() {
             </button>
           </div>
 
-          {/* existing tiles */}
+          {/* tiles */}
           <div style={{ marginTop: "1rem" }} className="grid grid-3">
             <div className="tile">Music & Dance</div>
             <div className="tile">Arts & Crafts</div>
